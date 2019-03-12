@@ -1,16 +1,19 @@
+%% 
 clc;
 clear all;
+
+%% 数据读入
 filename='bianyaqi.xlsx';
 VIN = xlsread(filename,1,'A2:A36');
 VOUT = xlsread(filename,1,'B2:B36');
 Fre = xlsread(filename,1,'C2:C36');
 
 tran_ratio = VOUT./VIN; %变压比
-Zin = 2.*pi.*Fre.*10^(-6);
+Zin = 2.*pi.*Fre.*10^(-6).*500.*10^(-9)
 % 变压比数据写入到xls
-xlswrite(filename,tran_ratio,1,'D2:D36');
+% xlswrite(filename,tran_ratio,1,'D2:D36');
 
-
+%% 
 figure(1);
 % title('输出电压 变压比 与输入频率关系')
 subplot(1,2,1)
@@ -56,4 +59,9 @@ ylabel(hBx(2),'Output Voltage');
 ylabel(hBx(1),'tran_ratio');
 grid on; grid minor;
 title('输出电压 变压比 与 输入频率关系');
+
+%% 
+figure(2);
+plot(Fre,Zin)
+
 
